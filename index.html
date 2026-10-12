@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1f4b99">
+  <meta name="description" content="PWA für Flächenplanung und Plattenzuschnitt">
+  <title>Plattenplaner PWA</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="app-header">
+    <div>
+      <h1>Plattenplaner</h1>
+      <p>Fläche zeichnen, bemaßen und passendes Plattenformat ermitteln</p>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="card">
+      <h2>1. Fläche</h2>
+      <div class="grid two">
+        <label>
+          Länge der Fläche (mm)
+          <input id="areaLength" type="number" min="1" value="4200">
+        </label>
+        <label>
+          Breite der Fläche (mm)
+          <input id="areaWidth" type="number" min="1" value="2400">
+        </label>
+        <label>
+          Schnittfuge (mm)
+          <input id="kerf" type="number" min="0" value="4">
+        </label>
+        <label>
+          Drehung der Platte erlauben
+          <select id="allowRotation">
+            <option value="yes" selected>Ja</option>
+            <option value="no">Nein</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="actions">
+        <button id="drawAreaBtn" class="primary">Zeichnung aktualisieren</button>
+        <button id="resetBtn">Zurücksetzen</button>
+      </div>
+
+      <div class="canvas-wrap">
+        <svg id="drawing" viewBox="0 0 900 500" role="img" aria-label="Zeichenfeld für Fläche"></svg>
+      </div>
+      <p class="hint">
+        Die Zeichnung dient der visuellen Kontrolle. Maßgeblich für die Berechnung sind die eingegebenen Maße.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>2. Plattenbibliothek</h2>
+
+      <div class="grid three">
+        <label>
+          Bezeichnung
+          <input id="sheetName" type="text" placeholder="z. B. OSB 2500 x 1250">
+        </label>
+        <label>
+          Länge (mm)
+          <input id="sheetLength" type="number" min="1" value="2500">
+        </label>
+        <label>
+          Breite (mm)
+          <input id="sheetWidth" type="number" min="1" value="1250">
+        </label>
+      </div>
+
+      <div class="actions">
+        <button id="addSheetBtn">Plattenformat speichern</button>
+        <button id="loadDefaultsBtn">Standardformate laden</button>
+      </div>
+
+      <div class="table-wrap">
+        <table id="sheetTable">
+          <thead>
+            <tr>
+              <th>Nutzen</th>
+              <th>Bezeichnung</th>
+              <th>Länge</th>
+              <th>Breite</th>
+              <th>Fläche</th>
+              <th>Aktion</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>3. Optimierung</h2>
+      <div class="actions">
+        <button id="calculateBtn" class="primary">Beste Platte berechnen</button>
+      </div>
+
+      <div id="result" class="result muted">
+        Bitte Fläche prüfen und mindestens ein Plattenformat aktivieren.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>4. Verlegevorschau</h2>
+      <div class="canvas-wrap">
+        <svg id="layoutPreview" viewBox="0 0 900 500" role="img" aria-label="Verlegeplan"></svg>
+      </div>
+      <p class="hint">
+        Die Vorschau zeigt die vorgeschlagene Aufteilung der Fläche in zugeschnittene Plattenstücke.
+      </p>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
