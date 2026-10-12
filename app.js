@@ -1,10 +1,9 @@
 const STORAGE_KEY = 'plattenplaner-pwa-v1';
 
 const defaultSheets = [
-  { id: createId(), name: 'OSB 2500 x 1250', length: 2500, width: 1250, active: true },
-  { id: createId(), name: 'OSB 2800 x 1250', length: 2800, width: 1250, active: true },
-  { id: createId(), name: 'Spanplatte 2050 x 925', length: 2050, width: 925, active: false },
-  { id: createId(), name: 'Multiplex 3000 x 1500', length: 3000, width: 1500, active: false }
+  { id: createId(), name: 'Rigips 2500 x 1250', length: 2500, width: 1250, active: true },
+  { id: createId(), name: 'Rigips 2000 x 1250', length: 2000, width: 1250, active: true },
+  { id: createId(), name: 'Rigips 1250 x 625', length: 1250, width: 625, active: true }
 ];
 
 const state = loadState();
